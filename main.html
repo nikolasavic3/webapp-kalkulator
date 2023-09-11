@@ -1,0 +1,289 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Kalkulator E-stipendije</title>
+        <link rel="stylesheet" href="/dizajn/style.css">
+
+        <style>
+            #pitanje2-broj, #koliko-pitanje14,  #koliko-pitanje8{
+    display: none;
+}
+.header{
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    padding: 10;
+
+    background-color: lightblue;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+}
+.ukupno{
+    margin-right: 100;
+}
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <div class="ukupno">
+                <h5 id="Bodovi">Ukupan broj bodova: 0</h5>
+            </div>
+            <h2>Kalkulator E-stipendije (za 2022 godinu)</h2>
+        </div>
+        
+        <div class="prvoPitanje">    
+            <label for="pitanje1">Prelazi li ukupni dohodak, studenta i njegovog kućanstva, ostvaren u prethodnoj kalendarskoj godini po članu kućanstva mjesečno 100% proračunske osnovice(prelazi li iznos od 3.326,00 kn za 2022. g.?)</label><br>
+            <input type="radio" name="pitanje1" value="da">
+            <label for="da">Da</label>
+            <input type="radio" name="pitanje1" value="ne">
+            <label for="ne">Ne</label><br>
+            <h4 id="output"></h4>
+        </div>
+
+    <label for="">Koliko iznosi ukupni dohodak, studenta i njegovog kućanstva, ostvaren u prethodnoj kalendarskoj godini po članu kućanstva mjesečno</label><br>
+    <form action="/pitanja" method="post">
+            <select name="primanja" onchange="pitanje2(this.value)" id="">
+                <option value="1800">
+                850,00 HRK/112,81 EUR ili manje prihoda priznaje se 1.800 bodova
+                </option>
+                <option  value="1500">
+                    od 850,01 HRK/112,82 EUR do 1.250,00 HRK/165,90 EUR priznaje se 1.500 bodova
+                </option>
+                <option value="1200">
+                    od 1.250,01 HRK/165,91 EUR do 1.550,00 HRK/205,72 EUR priznaje se 1.200 bodova
+                </option>
+                <option value="900">
+                    od 1.550,01 HRK/205,73 EUR do 1.850,00 HRK/245,54 EUR priznaje se 900 bodova
+                </option>
+                <option value="750">
+                    od 1.850,01 HRK/245,55 EUR do 2.150,00 HRK/285,35 EUR priznaje se 750 bodova
+                </option>
+                <option value="600">
+                    od 2.150,01 HRK/285,36 EUR do 2.450,00 HRK/325,17 EUR priznaje se 600 bodova
+                </option>
+                <option value="450">
+                    od 2.450,01 HRK/325,18 EUR do 2.750,00 HRK/364,99 EUR priznaje se 450 bodova
+                </option>
+                <option value="300">
+                    od 2.750,01 HRK/365,00 EUR do 3.050,00 HRK/404,80 EUR priznaje se 300 bodova
+                </option>
+                <option value="150">
+                    od 3.050,01 HRK/404,81 EUR do 100 % proračunske osnovice priznaje se 150 bodova.
+                </option>
+            </select>
+        </form>
+        
+        <h4>Označite tvrdnje koje se odnose na studenta</h4>
+    
+
+
+    <div class="pitanja">
+        <label for="">Student koji je roditelj priznaje se 300 bodova za svako dijete.</label><br><br>
+        <input onclick="showOptions('pitanje2-broj')" type="radio" name="pitanje2" id="primanje2" value="da"><label for="da">Da</label>
+        <input onclick="hideOptions('pitanje2-broj');postavi_broj_bodova(2, 0)" type="radio" name="pitanje2" id="primanje2" value="ne"><label for="ne">Ne</label><br>
+        <input type="number" name="pitanje2-broj" id="pitanje2-broj" placeholder="Unesite broj djece" min="0" oninput="vise_mogucnosti(300, 'pitanje2-broj', 2)">
+
+        <br><label for="">Student koji je roditelj i kojem je dijete preminulo priznaje se 550 bodova.</label><br><br>
+        <input onclick="add(4)"  type="radio" name="pitanje4" id="pitanje4" value="da"><label for="da">Da</label>
+        <input onclick="remove(4)" type="radio" name="pitanje4" id="pitanje4" value="ne"><label for="ne">Ne</label><br>
+
+        <br><label for="">Student kojemu je jedan roditelj umro, nestao ili nepoznat priznaje se 550 bodova.</label><br><br>
+        <input onclick="add(5)"  type="radio" name="pitanje5" id="pitanje5" value="da"><label for="da">Da</label>
+        <input onclick="remove(5)"  type="radio" name="pitanje5" id="pitanje5" value="ne"><label for="ne">Ne</label><br>
+        
+        <br><label for="">Student čija su oba roditelja umrla, nestala ili nepoznata ili je pod skrbništvom ili je kao dijete bio pod skrbništvom ili mu je priznato pravo na socijalnu uslugu smještaja ili mu je kao djetetu bilo priznato pravo na socijalnu uslugu smještaja na temelju propisa iz područja socijalne skrbi priznaje se 1.100 bodova.</label><br>
+        <input onclick="add(6)"  type="radio" name="pitanje6" id="pitanje6" value="da"><label for="da">Da</label>
+        <input  onclick="remove(6)" type="radio" name="pitanje6" id="pitanje6" value="ne"><label for="ne">Ne</label><br><br>
+
+        <label for="">Student koji na temelju sudske odluke ima prijavljeno prebivalište kod jednog roditelja (živi s njim), a s drugim roditeljem ostvaruje osobne odnose, odnosno susrete i druženja, priznaje se 150 bodova.</label><br>
+        <input onclick="add(7)" type="radio" name="pitanje7" id="pitanje7" value="da"><label for="da">Da</label>
+        <input onclick="remove(7)" type="radio" name="pitanje7" id="pitanje7" value="ne"><label for="ne">Ne</label><br><br>
+
+        <label for="">Student čiji je brat ili sestra korisnik prava na doplatak za pomoć i njegu ili prava na osobnu invalidninu na temelju propisa iz područja socijalne skrbi priznaje se 300 bodova za svakog brata ili sestru.</label><br>
+        <input onclick="showOptions('koliko-pitanje8')"  type="radio" name="pitanje8" id="pitanje8" value="da"><label for="da">Da</label>
+        <input onclick="hideOptions('koliko-pitanje8');postavi_broj_bodova(8, 0)" type="radio" name="pitanje8" id="pitanje8-ne" value="0"><label for="ne">Ne</label><br><br>
+        <input type="number" placeholder="Unesite broj braće i sestara" min="0" id="koliko-pitanje8" oninput="vise_mogucnosti(300, 'koliko-pitanje8', 8)">
+
+
+        <label for="">Student koji studira izvan mjesta prebivališta, a smješten je u studentskome domu, priznaje se 200 bodova, a za ostale studente koji studiraju izvan mjesta prebivališta priznaje se 300 bodova.</label><br>
+        <input onclick="add(21)"  type="radio" name="pitanje21" id="pitanje21" value="da"><label for="da">Da</label>
+        <input onclick="remove(21)" type="radio" name="pitanje21" id="pitanje21" value="ne"><label for="ne">Ne</label><br><br>
+
+        <label for="">Student koji studira izvan mjesta prebivališta, a <strong>nije smješten</strong> u studentskome domu priznaje se 300 bodova.</label><br>
+        <input onclick="add(10)"  type="radio" name="pitanje10" id="pitanje10" value="da"><label for="da">Da</label>
+        <input  onclick="add(10)" type="radio" name="pitanje10" id="pitanje10" value="ne"><label for="ne">Ne</label><br><br>
+
+
+        <label for="">Student koji je korisnik prava na zajamčenu minimalnu naknadu ili čiji su roditelji korisnici prava na zajamčenu minimalnu naknadu na temelju propisa iz područja socijalne skrbi priznaje se 200 bodova.</label><br>
+        <input onclick="add(11)"   type="radio" name="pitanje11" id="pitanje11" value="da"><label for="da">Da</label>
+        <input  onclick="remove(11)"  type="radio" name="pitanje11" id="pitanje11" value="ne"><label for="ne">Ne</label><br><br>
+
+        <label for="">Student koji je korisnik ili čiji roditelj je korisnik nak­nade za nezaposlene hrvatske branitelje iz Domovinskog rata i članove njihovih obitelji na temelju propisa kojima se uređuju prava hrvatskih branitelja iz Domovinskog rata ili novčane naknade za civilne stradalnike iz Domovinskog rata na temelju propisa kojima se uređuju prava civilnih stradalnika iz Domovinskog rata priznaje se 200 bodova..</label><br>
+        <input onclick="add(12)"  type="radio" name="pitanje12" id="pitanje12" value="da"><label for="da">Da</label>
+        <input onclick="add(12)" type="radio" name="pitanje12" id="pitanje12" value="ne"><label for="ne">Ne</label><br><br>
+
+        <label for="">Za studente koji imaju oba roditelja s tjelesnim oštećenjem od 100 % priznaje se 300 bodova, a za jednog roditelja s tjelesnim oštećenjem od 100 % priznaje se 150 bodova.</label><br><br>
+        <input onclick="add3(13,2)" type="radio" name="pitanje13" id="pitanje13" value="da"><label for="da">Oba roditelja</label>
+        <input onclick="add3(13,1)" type="radio" name="pitanje13" id="pitanje13" value="da2"><label for="da2">Jedan roditelj </label>
+        <input onclick="add3(13,0)"  type="radio" name="pitanje13" id="pitanje13" value="ne" checked><label for="ne">Nijedan</label><br><br>
+
+        <label for="">Student kojemu su brat ili sestra predškolske dobi ili u sustavu redovitoga osnovnoškolskog, srednjoškolskog i visokog obrazovanja priznaje se 150 bodova za svakog brata ili sestru uz uvjet da žive u kućanstvu.</label><br>
+        <input onclick="showOptions('koliko-pitanje14')"  type="radio" name="pitanje14" id="pitanje14" value="da"><label for="da">Da</label>
+        <input onclick="hideOptions('koliko-pitanje14');postavi_broj_bodova(14, 0)" type="radio" name="pitanje14" id="pitanje14" value="ne"><label for="ne">Ne</label><br><br>
+        <input type="number" placeholder="Unesite broj braće i sestara" id="koliko-pitanje14" oninput="vise_mogucnosti(300, 'koliko-pitanje14', 14)">
+
+        <label for="">Student s najmanje 60 % utvrđenog oštećenja organizma ili najmanje III. stupnja oštećenja funkcionalnih sposobnosti, sukladno Uredbi o metodologijama vještačenja (»Narodne novine«, broj: 67/17 i 56/18), priznaje se 300 bodova.</label><br>
+        <input onclick="add(15)"  type="radio" name="pitanje15" id="pitanje15" value="da"><label for="da">Da</label>
+        <input onclick="remove(15)" type="radio" name="pitanje15" id="pitanje15" value="ne"><label for="ne">Ne</label><br><br>
+
+        <label for="">Student s utvrđenim oštećenjem organizma do 50 % ili do II. stupnja oštećenja funkcionalnih sposobnosti, sukladno Uredbi o metodologijama vještačenja (»Narodne novine«, broj: 67/17 i 56/18), priznaje se 150 bodova.</label><br>
+        <input onclick="add(16)" type="radio" name="pitanje16" id="pitanje16" value="da"><label for="da">Da</label>
+        <input onclick="remove(16)" type="radio" name="pitanje16" id="pitanje16" value="ne"><label for="ne">Ne</label><br><br>
+
+
+        <label for="">Student hrvatskog branitelja, studenta pripadnika Hrvatskog vijeća obrane (u daljnjem tekstu: HVO), studenta koji je dijete hrvatskog branitelja iz Domovinskog rata i studenta koji je dijete pripadnika HVO-a priznaje se 200 bodova, a Student čija su oba roditelja branitelji iz Domovinskog rata (ili pripadnici HVO-a) priznaje se 400 bodova..</label><br>
+        <input onclick="add3(17,2)"  type="radio" name="pitanje17" id="pitanje17" value="da"><label>Oba roditelja</label>
+        <input onclick="add3(17,1)" type="radio" name="pitanje17" id="pitanje17" value="da2"><label>Jedan roditelj </label>
+        <input onclick="add3(17,0)" type="radio" name="pitanje17" id="pitanje17" value="ne" checked><label for="ne">Nijedan</label><br><br>
+
+        <label for="">Student pod međunarodnom i privremenom zaštitom, u skladu s propisima koji reguliraju prava osoba pod međunarodnom i privremenom zaštitom, priznaje se 1.100 bodova.</label><br>
+        <input onclick="add(23)"  type="radio" name="pitanje23" id="pitanje23" value="da"><label for="da">Da</label>
+        <input onclick="remove(23)" type="radio" name="pitanje23" id="pitanje23" value="ne"><label for="ne">Ne</label><br><br>
+
+        <label for="">Student koji studira studijski program kojim se stječe visokoobrazovna kvalifikacija za zvanja koja su definirana kao deficitarna zanimanja, a navedena su u natječaju, priznaje se 300 bodova..</label><br>
+        <input onclick="add(24)" type="radio" name="pitanje24" id="pitanje24" value="da"><label for="da">Da</label>
+        <input onclick="remove(24)"  type="radio" name="pitanje24" id="pitanje24" value="ne"><label for="ne">Ne</label><br><br>
+
+        <label for=""> Student kategoriziranog sportaša s valjanom kategorizacijom I., II. ili III. kategorije priznaje se 300 bodova.</label><br>
+        <input onclick="add(18)"  type="radio" name="pitanje18" id="pitanje18" value="da"><label for="da">Da</label>
+        <input onclick="remove(18)"  type="radio" name="pitanje18" id="pitanje18" value="ne"><label for="ne">Ne</label><br><br>
+
+        <label for="">Student darovitoga mladog umjetnika koji ima ostvaren uspjeh na državnim ili međunarodnim natjecanjima u prethodnome glazbenom, likovnom ili umjetničkom obrazovanju, što se dokazuje potvrdom o ostvarenome uspjehu (pri tome se kao ostvareni uspjeh smatra osvajanje 1. nagrade na državnim natjecanjima u pojedinačnoj kategoriji, odnosno prvoga, drugoga ili trećega mjesta na međunarodnima natjecanjima u posljednje četiri školske/akademske godine), priznaje se 300 bodova.</label><br>
+        <input onclick="add(19)" type="radio" name="pitanje19" id="pitanje19" value="da"><label for="da">Da</label>
+        <input onclick="remove(19)"  type="radio" name="pitanje19" id="pitanje19" value="ne"><label for="ne">Ne</label><br><br>
+    </div>
+
+    <script>
+    var brojBodova = 0;
+
+var pitanja = {
+  1: [0],
+  2: [0, 300],
+  3: [0, 0],
+  4: [0, 550],
+  5: [0, 550],
+  6: [0, 1100],
+  7: [0, 150],
+  8: [0, 300, 1],
+  9: [0],
+  10: [0, 300],
+  11: [0, 200],
+  12: [0, 200],
+  13: [0],
+  14: [0],
+  15: [0, 300],
+  16: [0, 150],
+  17: [0],
+  18: [0, 300],
+  19: [0, 300],
+  20: [0],
+  21: [0, 200],
+  22: [0, 300],
+  23: [0, 1100],
+  24: [0, 300],
+};
+
+function add(n) {
+  if (pitanja[n][0] == 0) {
+    brojBodova += pitanja[n][1];
+    pitanja[n][0] = 1;
+    document.getElementById("Bodovi").innerText =
+      "Ukupan broj bodova: " + brojBodova;
+  }
+}
+function add3(n, k) {
+  if (k == 1) {
+    brojBodova -= pitanja[n][0];
+    brojBodova += 300;
+    pitanja[n][0] = 300;
+  }
+  if (k == 2) {
+    brojBodova -= pitanja[n][0];
+    brojBodova += 600;
+    pitanja[n][0] = 600;
+  }
+  if (k == 0) {
+    brojBodova -= pitanja[n][0];
+    pitanja[n][0] = 0;
+  }
+  document.getElementById("Bodovi").innerText =
+    "Ukupan broj bodova: " + brojBodova;
+}
+
+var bodovi_pitanje2 = 0;
+function pitanje2(broj) {
+  broj = parseInt(broj);
+  brojBodova -= bodovi_pitanje2;
+  brojBodova += broj;
+  bodovi_pitanje2 = broj;
+  document.getElementById("Bodovi").innerText =
+    "Ukupan broj bodova: " + brojBodova;
+}
+
+function vise_mogucnosti(broj_bodova, inputId, m) {
+  var n = document.getElementById(inputId).value;
+  if (n == "") {
+    n = 0;
+  }
+  brojBodova -= pitanja[m][0] * broj_bodova; // Decrease the score by the previous value's score
+  pitanja[m][0] = n; // Update the previous value to the current value
+  brojBodova += n * broj_bodova; // Increase the score by the current value's score
+  document.getElementById("Bodovi").innerText =
+    "Ukupan broj bodova: " + brojBodova;
+}
+
+function postavi_broj_bodova(broj_pitanja, val) {
+  brojBodova -= pitanja[broj_pitanja][0];
+  pitanja[broj_pitanja][0] = val;
+  brojBodova += pitanja[broj_pitanja][0];
+  document.getElementById("Bodovi").innerText =
+    "Ukupan broj bodova: " + brojBodova;
+}
+
+function remove(n) {
+  if (pitanja[n][0] == 1) {
+    brojBodova = brojBodova - pitanja[n][1];
+    pitanja[n][0] = 0;
+    document.getElementById("Bodovi").innerText =
+      "Ukupan broj bodova: " + brojBodova;
+  }
+}
+
+function showOptions(e) {
+  document.getElementById(e).style.display = "block";
+}
+function hideOptions(e) {
+  document.getElementById(e).style.display = "none";
+}
+
+var radios = document.getElementsByName("pitanje1");
+
+for (var i = 0; i < radios.length; i++) {
+  radios[i].addEventListener("change", function () {
+    if (this.value == "ne") {
+      document.getElementById("output").innerText =
+        "Studnet nema pravo na stipendiju.";
+    } else if (this.value == "da") {
+      document.getElementById("output").innerText =
+        "Student ima pravo na stipendiju.\nIspunite upitnik kako biste dobili procjenu bodova";
+    }
+  });
+}
+
+
+    </script>
+
+</body>
+</html>
